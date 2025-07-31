@@ -4,7 +4,7 @@ import React from "react";
 function RegisterDeviceForm({ onSubmit, studentIdInput, setStudentIdInput }) {
   return (
     <section>
-      <h2>Đăng ký Thiết bị (Chỉ khi phiên mở)</h2>
+      <h2>Nhập mã sinh viên để điểm danh (Chỉ khi phiên mở)</h2>
       <form onSubmit={onSubmit}>
         <input
           type="text"
@@ -12,7 +12,7 @@ function RegisterDeviceForm({ onSubmit, studentIdInput, setStudentIdInput }) {
           value={studentIdInput}
           onChange={(e) => setStudentIdInput(e.target.value)}
         />
-        <button type="submit">Đăng ký</button>
+        <button type="submit">Điểm danh </button>
       </form>
     </section>
   );
