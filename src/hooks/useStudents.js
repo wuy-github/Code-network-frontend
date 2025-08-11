@@ -1,6 +1,6 @@
 // src/hooks/useStudents.js
 import { useState, useEffect, useCallback } from "react";
-import axios from "axios";
+import api from "../api";
 
 // Hook này quản lý mọi thứ liên quan đến danh sách sinh viên
 export function useStudents(apiUrl, setMessage) {
@@ -11,7 +11,7 @@ export function useStudents(apiUrl, setMessage) {
 
   // Lấy danh sách sinh viên
   const fetchStudents = useCallback(() => {
-    axios
+    api
       .get(`${apiUrl}/api/students`)
       .then((response) => setStudents(response.data))
       .catch((error) =>
@@ -30,7 +30,7 @@ export function useStudents(apiUrl, setMessage) {
       setMessage("Vui lòng nhập đủ MSSV và Họ tên để thêm.");
       return;
     }
-    axios
+    api
       .post(`${apiUrl}/api/students`, {
         student_id: newStudentId,
         full_name: newStudentName,
@@ -54,7 +54,7 @@ export function useStudents(apiUrl, setMessage) {
       setMessage("Vui lòng nhập MSSV để đăng ký.");
       return;
     }
-    axios
+    api
       .post(`${apiUrl}/api/register`, { student_id: studentIdInput })
       .then((response) => {
         setMessage(response.data.message);

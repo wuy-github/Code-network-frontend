@@ -1,6 +1,6 @@
 // src/hooks/useSession.js
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api";
 
 // Hook này quản lý mọi thứ liên quan đến phiên điểm danh
 export function useSession(apiUrl, setMessage) {
@@ -8,7 +8,7 @@ export function useSession(apiUrl, setMessage) {
   const [sessionReport, setSessionReport] = useState(null);
   // Lấy trạng thái phiên từ server khi hook được sử dụng lần đầu
   useEffect(() => {
-    axios
+    api
       .get(`${apiUrl}/api/session/status`)
       .then((response) => setIsSessionActive(response.data.is_active))
       .catch((error) => console.error("Lỗi khi lấy trạng thái phiên!", error));
@@ -17,7 +17,7 @@ export function useSession(apiUrl, setMessage) {
   // Hàm bắt đầu phiên
   const handleStartSession = () => {
     setMessage("");
-    axios
+    api
       .post(`${apiUrl}/api/session/start`)
       .then((response) => {
         setIsSessionActive(true);
@@ -32,7 +32,7 @@ export function useSession(apiUrl, setMessage) {
   // Hàm kết thúc phiên
   const handleStopSession = () => {
     setMessage("");
-    axios
+    api
       .post(`${apiUrl}/api/session/stop`)
       .then((response) => {
         console.log(
